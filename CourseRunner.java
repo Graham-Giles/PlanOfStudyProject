@@ -18,11 +18,23 @@ public class CourseRunner
 		
 		CourseList testCourses = new CourseList(1);
 		
-		testCourses.addCourse("CSCI", "1301");
-		testCourses.addCourse("CSCI", "1302");
+		testCourses.addCourseGrade("CSCI", "1301", "A");
+		testCourses.addCourseGrade("CSCI", "1302", "A");
 		testCourses.printCourses();
 		
 		courses.printMissing(testCourses);
+		
+		CourseList testFailures = new CourseList(1);
+		
+		testFailures.addCourseGrade("CSCI", "1301", "A");
+		testFailures.addCourseGrade("CSCI", "1302", "K");
+		testFailures.addCourseGrade("CSCI", "1303", "D");
+		testFailures.addCourseGrade("CSCI", "1304", "F");
+		testFailures.addCourseGrade("CSCI", "1305", "C");
+		
+		testFailures.printCourses();
+		testFailures.removeFailures();
+		testFailures.printCourses();
 		
 		//added the following while loop to test things 
 		//repeatedly without recompiling

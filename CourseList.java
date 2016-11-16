@@ -53,10 +53,26 @@ public class CourseList
 		capacity = courses.length;
 	}
 	
-	//adds a new course to the list
+	//adds a new course to the list with a default grade of C
 	public void addCourse(String subject, String level)
 	{
 		Course newCourse = new Course(subject, level);
+		
+		if(this.isFull())
+			enlarge();
+		
+		for (int i = length-1; i>=0; i--)
+		{
+			courses[i+1] = courses[i];
+		}
+		courses[0] = newCourse;
+		length++;
+	}
+	
+	//adds a new course to the list with a specified grade
+	public void addCourseGrade(String subject, String level, String grade)
+	{
+		Course newCourse = new Course(subject, level, grade);
 		
 		if(this.isFull())
 			enlarge();
@@ -92,7 +108,7 @@ public class CourseList
 		return courses[location];
 	} 
 	
-	//prints the courses via S.o.P
+	//prints the courses information via S.o.P
 	public void printCourses()
 	{
 		String name;
@@ -100,20 +116,54 @@ public class CourseList
 		{
 			if (i < length-1)
 			{
-				name = courses[i].title();
+				name = courses[i].title() + " " + courses[i].grade();
 				System.out.print(name + ", ");
 			}else{
-				name = courses[i].title();
+				name = courses[i].title() + " " + courses[i].grade();
 				System.out.print(name);
 			}
 		}
 		System.out.println();
 	}
 	
-	//compares the course to a specified course at a specified location 
-	public boolean compareCourse(Course newCourse, int location)
+	//compares the course title to a specified course at a specified location 
+	public boolean compareCourseTitle(Course newCourse, int location)
 	{
 		return courses[location].title().equals(newCourse.title());
+	}
+	
+	//compares the course grade at a specified location to a standard grading system 
+	//this is probably temporary but it might not be idk
+	public boolean checkGrade(int location)
+	{
+		String grade = courses[location].grade();
+		//I was going to use a switch statement here but apparently you cannot use the || operator in case
+		if(grade == "A" || grade == "B" || grade == "C" || grade == "K")
+		{
+			return true;
+		}
+		else if(grade == "D" || grade == "F")
+		{
+			return false;
+		}
+		else
+		{
+			return false;
+		}
+
+	}
+	
+	//checks the courseList for any failed classes and removes them
+	public void removeFailures()
+	{
+		for(int i = 0; i < length; i++)
+		{
+			if(!this.checkGrade(i))
+			{
+				removeFrom(i);
+				i--;
+			}
+		}
 	}
 	
 	//attempts to print the courses that the given courselist is missing
@@ -133,7 +183,7 @@ public class CourseList
 			tempCourse = givenList.courseAt(j);
 			for(int i = 0; i < length; i++)
 			{
-				if(compareCourse(tempCourse,i))
+				if(compareCourseTitle(tempCourse,i))
 					tempCourseList.removeFrom(i);
 			}
 		}
