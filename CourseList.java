@@ -57,10 +57,10 @@ public class CourseList
 	public void addCourse(String subject, String level)
 	{
 		Course newCourse = new Course(subject, level);
-		
+
 		if(this.isFull())
 			enlarge();
-		
+
 		for (int i = length-1; i>=0; i--)
 		{
 			courses[i+1] = courses[i];
@@ -77,6 +77,22 @@ public class CourseList
 		if(this.isFull())
 			enlarge();
 		
+		for (int i = length-1; i>=0; i--)
+		{
+			courses[i+1] = courses[i];
+		}
+		courses[0] = newCourse;
+		length++;
+	}
+
+	//adds a new course to the list with a default grade of C
+	public void addCoursePrereq(String subject, String level, CourseList prereqs)
+	{
+		Course newCourse = new Course(subject, level, prereqs);
+
+		if(this.isFull())
+			enlarge();
+
 		for (int i = length-1; i>=0; i--)
 		{
 			courses[i+1] = courses[i];
