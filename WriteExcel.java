@@ -10,8 +10,8 @@ public class WriteExcel
 {
 	public static void main(String[] args) throws FileNotFoundException, IOException
 	{
-		Path currentPath = Paths.get("");
-		String path = currentPath.toAbsolutePath().toString();
+		//Path currentPath = Paths.get("");
+		//String path = currentPath.toAbsolutePath().toString();
 		//setting up code to get the path without hardcoding it
 		
 		XSSFWorkbook workbook = new XSSFWorkbook();

@@ -4,7 +4,7 @@ public class Course
 	private String subject; //e.g. CSCI
 	private String level; //e.g. 1301
 	private String grade; //e.g. F
-	private CourseList prereqs; //e.g. CSCI 3200
+	private PrereqList prereqs; //e.g. CSCI 3200
 	
 	//constructor for student course
 	public Course(String newSubject, String newLevel, String newGrade)
@@ -15,7 +15,7 @@ public class Course
 	}
 	
 	//constructor for plan of study course with a prerequisite
-	public Course(String newSubject, String newLevel, CourseList newPrereq)
+	public Course(String newSubject, String newLevel, PrereqList newPrereq)
 	{
 		subject = newSubject;
 		level = newLevel;
@@ -49,6 +49,9 @@ public class Course
 		return grade;
 	}
 
-	//returns the titles of the prerequisites
-	public void prereqs() { prereqs.printCourses(); }
+	public PrereqList prereqs()
+	{
+		return prereqs;
+	}
+
 }

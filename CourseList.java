@@ -86,7 +86,7 @@ public class CourseList
 	}
 
 	//adds a new course to the list with a default grade of C
-	public void addCoursePrereq(String subject, String level, CourseList prereqs)
+	public void addCoursePrereq(String subject, String level, PrereqList prereqs)
 	{
 		Course newCourse = new Course(subject, level, prereqs);
 
@@ -124,22 +124,23 @@ public class CourseList
 		return courses[location];
 	} 
 	
-	//prints the courses information via S.o.P
-	public void printCourses()
+	//returns the course titles as a lengthy string
+	public String getCourseTitles()
 	{
-		String name;
+		String temp;
+		String name = "";
 		for(int i = 0; i < length; i++)
 		{
 			if (i < length-1)
 			{
-				name = courses[i].title() + " " + courses[i].grade();
-				System.out.print(name + ", ");
+				temp = courses[i].title() + " " + courses[i].grade();
+				name = name + temp + ",";
 			}else{
-				name = courses[i].title() + " " + courses[i].grade();
-				System.out.print(name);
+				temp = courses[i].title() + " " + courses[i].grade();
+				name = name + temp;
 			}
 		}
-		System.out.println();
+		return name;
 	}
 	
 	//compares the course title to a specified course at a specified location 
@@ -181,7 +182,7 @@ public class CourseList
 			}
 		}
 	}
-	
+
 	//attempts to print the courses that the given courselist is missing
 	//as compared to the current courselist
 	//e.g. if the list contains "A, B, C"
@@ -191,9 +192,9 @@ public class CourseList
 	{
 		CourseList tempCourseList;
 		tempCourseList = this;
-		
+
 		Course tempCourse;
-		
+
 		for(int j = 0; j < givenList.length(); j++)
 		{
 			tempCourse = givenList.courseAt(j);
@@ -204,7 +205,7 @@ public class CourseList
 			}
 		}
 
-		tempCourseList.printCourses();
-		System.out.println();
+		String temp = tempCourseList.getCourseTitles();
+		System.out.println(temp);
 	}
 }
