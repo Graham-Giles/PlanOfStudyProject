@@ -27,4 +27,14 @@ public class PrereqList
 
         return name;
     }
+
+    public int length()
+    {
+        return prereqs.size();
+    }
+
+    public CourseList courseListAt(int i)
+    {
+        return prereqs.get(i);
+    }
 }

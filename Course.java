@@ -5,6 +5,7 @@ public class Course
 	private String level; //e.g. 1301
 	private String grade; //e.g. F
 	private PrereqList prereqs; //e.g. CSCI 3200
+	private int weight = 0;
 	
 	//constructor for student course
 	public Course(String newSubject, String newLevel, String newGrade)
@@ -54,4 +55,15 @@ public class Course
 		return prereqs;
 	}
 
+	//returns the weight of the course
+	public int getWeight()
+	{
+		return weight;
+	}
+
+	//sets the weight of the course
+	public void setWeight(int w)
+	{
+		weight = w;
+	}
 }
