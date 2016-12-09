@@ -32,6 +32,13 @@ public class Course
 		grade = "C";
 		prereqs = null;
 	}
+
+	public Course(String newSubject, String newLevel, String newGrade, PrereqList newPrereq)
+	{
+		subject = newSubject;
+		level = newLevel;
+		grade = newGrade;
+	}
 	
 	//returns the title of the course
 	public String title()
@@ -53,6 +60,11 @@ public class Course
 	public PrereqList prereqs()
 	{
 		return prereqs;
+	}
+
+	public void setPrereqs(PrereqList p)
+	{
+		prereqs = p;
 	}
 
 	//returns the weight of the course

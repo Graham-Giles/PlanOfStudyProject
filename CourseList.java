@@ -4,12 +4,14 @@ public class CourseList
 	private Course[] courses;
 	private int length;
 	private int capacity;
+	private String name;
 	
 	//constructor for an initially empty CourseList
-	public CourseList(int newCapacity)
+	public CourseList(int newCapacity, String newName)
 	{
 		length = 0;
 		capacity = newCapacity;
+		name = newName;
 		
 		courses = new Course[capacity];
 	}
@@ -39,6 +41,11 @@ public class CourseList
 	public int length()
 	{
 		return length;
+	}
+
+	public Course[] courseArray()
+	{
+		return courses;
 	}
 	
 	//increases the size of the list
@@ -142,7 +149,23 @@ public class CourseList
 		}
 		return name;
 	}
-	
+	public String getCourseTitlesWithWeight()
+	{
+		String temp;
+		String name = "";
+		for(int i = 0; i < length; i++)
+		{
+			if (i < length-1)
+			{
+				temp = courses[i].title() + " " + courses[i].grade() + " weight:" + courses[i].getWeight();
+				name = name + temp + ",";
+			}else{
+				temp = courses[i].title() + " " + courses[i].grade() + " weight:" + courses[i].getWeight();
+				name = name + temp;
+			}
+		}
+		return name;
+	}
 	//compares the course title to a specified course at a specified location 
 	public boolean compareCourseTitle(Course newCourse, int location)
 	{
@@ -175,7 +198,7 @@ public class CourseList
 	{
 		for(int i = 0; i < length; i++)
 		{
-			if(!this.checkGrade(i))
+			if(this.checkGrade(i))
 			{
 				removeFrom(i);
 				i--;
@@ -183,12 +206,12 @@ public class CourseList
 		}
 	}
 
-	//attempts to print the courses that the given courselist is missing
+	//returns a list of the courses that the given courselist is missing
 	//as compared to the current courselist
 	//e.g. if the list contains "A, B, C"
 	//and you give it a list containing "A, C"
-	//it would print "B"
-	public void printMissing(CourseList givenList)
+	//it would return "B"
+	public CourseList getMissing(CourseList givenList)
 	{
 		CourseList tempCourseList;
 		tempCourseList = this;
@@ -204,8 +227,43 @@ public class CourseList
 					tempCourseList.removeFrom(i);
 			}
 		}
+		return tempCourseList;
+	}
 
-		String temp = tempCourseList.getCourseTitles();
-		System.out.println(temp);
+	//attempts to sort the CourseList based on the weight of its contents
+	//uses bubblesort
+	public CourseList sortWeights(CourseList cl)
+	{
+		Course[] givenList = cl.courseArray();
+		boolean swap = true;
+		Course temp;
+
+		while(swap)
+		{
+			swap = false;
+			for(int i = 0; i < cl.length() - 1; i++)
+			{
+				if(givenList[i].getWeight() < givenList[i + 1].getWeight())
+				{
+					temp = givenList[i];
+					givenList[i]=givenList[i+1];
+					givenList[i + 1] = temp;
+					swap = true;
+				}
+			}
+		}
+
+		CourseList sortedList = new CourseList(givenList);
+		return sortedList;
+	}
+
+	public String getName()
+	{
+		return name;
+	}
+
+	public void setName(String s)
+	{
+		name = s;
 	}
 }
