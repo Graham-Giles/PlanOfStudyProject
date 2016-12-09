@@ -64,6 +64,7 @@ public class CourseRunner
 						if(!majorSelected)
 						{
 							String majorName;
+							System.out.println("");
 							System.out.println("Please Select a Major:");
 							//select a major
 							//if majors is empty
@@ -80,6 +81,7 @@ public class CourseRunner
 							boolean majorEscape = false;
 							while(!majorEscape)
 							{
+								System.out.println("");
 								System.out.println("Type Major Name:");
 								majorName = s.nextLine();
 								for(int i = 0; i < majors.size(); i++)
@@ -87,6 +89,7 @@ public class CourseRunner
 									if(majorName.equals(majors.get(i).getName()))
 									{
 										studentMajor = majors.get(i);
+										System.out.println("");
 										System.out.println("Your Major Is:");
 										System.out.println(studentMajor.getName());
 										majorSelected = true;
@@ -97,6 +100,8 @@ public class CourseRunner
 							}
 						}
 
+						System.out.println("");
+						System.out.println("");
 						System.out.println("Student Menu Selection:");
 						System.out.println("	1. Input Previous Courses");
 						System.out.println("	2. Generate List of Courses to Take");
@@ -136,14 +141,17 @@ public class CourseRunner
 
 							//Generate List of Courses to Take
 							case 2:
+								System.out.println("");
 								System.out.println("Based on your previous courses, here is a list of courses you should take:");
 								studentCourses.removeFailures();
-								System.out.println("You may need to take the course again if you received a grade of D or below.");
+								System.out.println("*NOTE: You may need to take the course again if you received a grade of D or below.");
+								System.out.println("");
 								CourseList toTake = studentMajor.getMissing(studentCourses);
 								assignWeights(toTake);
 								toTake.sortWeights(toTake);
 								printPrerequisites(toTake);
-								System.out.println("Higher weight means the course is more useful:");
+								System.out.println("");
+								System.out.println("Higher weight means the course should be taken as soon as possible:");
 								System.out.println(toTake.getCourseTitlesWithWeight());
 								break;
 

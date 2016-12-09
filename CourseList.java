@@ -158,7 +158,7 @@ public class CourseList
 			if (i < length-1)
 			{
 				temp = courses[i].title() + " " + courses[i].grade() + " weight:" + courses[i].getWeight();
-				name = name + temp + ",";
+				name = name + temp + ", ";
 			}else{
 				temp = courses[i].title() + " " + courses[i].grade() + " weight:" + courses[i].getWeight();
 				name = name + temp;
